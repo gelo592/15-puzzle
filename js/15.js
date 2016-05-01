@@ -26,6 +26,7 @@ puzzle.main = (function() {
     emptyX = tileX;
     emptyY = tileY;
 
+    increaseMoves();
     drawPuzzleBoard();
 
     //check if puzzle array is sorted aka solved
@@ -86,6 +87,11 @@ puzzle.main = (function() {
     }
     return true;
   };
+
+  function increaseMoves() {
+    var $move_counter = $("#move-counter");
+    $move_counter[0].innerHTML = parseInt($move_counter[0].innerHTML) + 1;
+  }
 
   function attachHandlers() {
     $(".puzzle-tile-wrap").click(clickHandler);
