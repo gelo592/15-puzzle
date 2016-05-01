@@ -1,0 +1,14 @@
+.puzzle-box {
+  position: relative;
+}
+
+.puzzle-box .puzzle-tile-wrap {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  border: 1px solid rgb(216, 216, 216);
+  margin: 1px;
+  line-height: 100px;
+}
+
