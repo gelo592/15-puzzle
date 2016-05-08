@@ -67,8 +67,6 @@ puzzle.main = {
 
   shufflePuzzleBoard: function () {
     var counter = 1000, //some arbitrary high number to give greater mixing potential
-      cryptoArr = new Uint8Array(1),
-      cryptoObj = window.crypto || window.msCrypto,
       swapIndex,
       neighborIndex,
       emptyValue,
@@ -78,7 +76,7 @@ puzzle.main = {
       swappables = this.getSwappables(this.emptyIndex);
 
       //of the valid neighbor tiles randomly choose one
-      swapIndex = Math.floor(cryptoObj.getRandomValues(cryptoArr)[0] / 256 * swappables.length);
+      swapIndex = Math.floor(Math.random() * swappables.length);
       neighborIndex = swappables[swapIndex];
 
       //swap random neighbor tile and empty tile in puzzle array
