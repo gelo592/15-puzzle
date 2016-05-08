@@ -124,6 +124,8 @@ puzzle.main = {
 
     $(".puzzle-img").css("background-image", this.imageArr[this.imgIndex % 3]);
     this.imgIndex++;
+
+    $(".puzzle-tile-wrap").click($.proxy(this.clickHandler, this));
   },
 
   drawPuzzleBoard: function () {
@@ -163,12 +165,20 @@ puzzle.main = {
   },
 
   attachHandlers: function () {
-    $(".puzzle-tile-wrap").click($.proxy(this.clickHandler, this));
-    $("#showImgBtn").mousedown(function(e){$(".puzzle-hint").css("display", "inline-block");});
-    $("#showImgBtn").mouseup(function(e){$(".puzzle-hint").css("display", "none");});
-    $("#showNumberBtn").mousedown(function(e){$(".puzzle-tile").css("display", "inline-block");});
-    $("#showNumberBtn").mouseup(function(e){$(".puzzle-tile").css("display", "none");});
+    $("#newGameBtn").click(function(e){puzzle.main.playPuzzle(4);});
+    $("#showImgBtn").click(this.toggleInline);
+    $("#showNumberBtn").click(this.toggleInline);
     $(window).resize($.proxy(this.drawPuzzleBoard, this));
+  },
+
+  toggleInline: function(e){
+    var $toggle_target = $(e.currentTarget.dataset['toggle']);
+    if($toggle_target.hasClass("visible")) {
+      $toggle_target.removeClass("visible");
+    }
+    else {
+      $toggle_target.addClass("visible");
+    }
   },
 
   clickHandler: function (e) {
@@ -190,10 +200,8 @@ puzzle.main = {
     this.buildPuzzleHTML();
     this.shufflePuzzleBoard();
     this.drawPuzzleBoard();
-    this.attachHandlers();
   }
 };
 
-
-$("#newGameBtn").click(function(e){puzzle.main.playPuzzle(4);});
+puzzle.main.attachHandlers();
 puzzle.main.playPuzzle(4);
